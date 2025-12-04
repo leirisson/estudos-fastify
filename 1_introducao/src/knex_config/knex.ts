@@ -1,11 +1,13 @@
 import { knex as setupKnex } from 'knex'
 
-
-export const knex = setupKnex({
+export const configKnex = {
     client: "sqlite3",
     connection: {
         filename: "./src/data/dev.db"
     },
-     useNullAsDefault: true,
-})
+    useNullAsDefault: true,
+
+}
+
+export const knex = setupKnex(configKnex)
 

@@ -1,0 +1,28 @@
+{
+  "name": "4_fastify_com_knex",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsx watch src/server.ts",
+    "lint": "eslint src --ext .ts --fix"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "fastify": "^5.6.2",
+    "knex": "^3.1.0",
+    "mysql2": "^3.16.0",
+    "oracledb": "^6.10.0",
+    "pg": "^8.16.3",
+    "sqlite3": "^5.1.7",
+    "tsx": "^4.21.0"
+  },
+  "devDependencies": {
+    "@rocketseat/eslint-config": "^2.2.2",
+    "eslint": "^8.57.1"
+  }
+}

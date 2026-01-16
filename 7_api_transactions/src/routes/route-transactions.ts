@@ -23,6 +23,12 @@ export async function transactionsRoutes(app: FastifyInstance) {
         return reply.send({transaction})
     })
 
+    app.get('/sumary', async () => {
+        const sumary = await knex('transactions').sum('amount', {as:'amount'}).first()
+
+        return {sumary}
+    })
+
     app.post('/', async (request: FastifyRequest, reply: FastifyReply) => {
         // create schema for validade data type
         const createTransactionBodySchema = z.object({

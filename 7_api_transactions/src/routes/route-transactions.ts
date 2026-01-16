@@ -9,10 +9,8 @@ import { checkSessionExists } from '../middlewares/check-session-exists'
 export async function transactionsRoutes(app: FastifyInstance) {
     app.get('/', { preHandler: [checkSessionExists] },
         async (request: FastifyRequest, reply: FastifyReply) => {
-
+        
             const { sessionId } = request.cookies
-
-            console.log(sessionId)
 
             const transactions = await knex('transactions')
                 .where('session_id', sessionId)

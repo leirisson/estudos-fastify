@@ -1,8 +1,8 @@
-import {app} from './app'
+import { app } from './app'
 import { _env } from './env'
 
 
-function stratServer(){
+function stratServer() {
     try {
         app.listen({
             port: _env.PORT

@@ -8,16 +8,25 @@ export async function mealRoutes(app: FastifyInstance) {
 
     app.get('/summary', async (request, reply) => {
         const quantity_meal = await knex('meal')
-        .count()
+        .count('id as total')
         .first()
 
-        const quantity_meal_indiet = 
+        const quantityMealIndiet = 
          await knex('meal')
-        .count()
+        .count('id as total')
         .where('is_diet', true)
         .first()
 
-        return reply.send({quantity_meal, quantity_meal_indiet})
+        const no_diet = await knex('meal')
+        .count('id as total')
+        .where('is_diet', false)
+        .first()
+
+        return reply.send({
+            quantity_meal, 
+            quantityMealIndiet,
+            no_diet
+        })
     })
 
     app.get('/all/user-id/:id', async (request, reply) => {

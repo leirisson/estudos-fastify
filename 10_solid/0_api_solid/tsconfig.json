@@ -5,10 +5,17 @@
     // "rootDir": "./src",
     // "outDir": "./dist",
 
+    "baseUrl": "./",
+    "paths": {
+      "@/*":["./src/*"]
+    },
+
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
-    "module": "nodenext",
-    "target": "es2020",
+
+    "target": "ES2022",
+    "module": "commonjs",        // ← importante
+    "moduleResolution": "node",
     "types": [],
     // For nodejs:
     // "lib": ["esnext"],
@@ -35,7 +42,7 @@
     // Recommended Options
     "strict": true,
     "jsx": "react-jsx",
-    "verbatimModuleSyntax": true,
+    "verbatimModuleSyntax": false,
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",

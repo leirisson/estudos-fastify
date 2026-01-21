@@ -1,0 +1,17 @@
+{
+  "name": "dia_1_o_que_e_solid-srp",
+  "version": "1.0.0",
+  "description": "🎯 Objetivo do dia\r Ao final do Dia 1 você deve conseguir:\r Explicar o que é SOLID\r Entender por que o SRP existe\r Identificar código errado vs código correto\r Aplicar SRP em um exemplo simples (Produto / Pedido)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsx watch src/main.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "tsx": "^4.21.0"
+  }
+}

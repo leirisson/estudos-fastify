@@ -7,10 +7,13 @@
   "scripts": {
     "start": "node build/server.cjs",
     "start:dev": "tsx watch src/server.ts",
-    "build": "tsup src --out-dir build"
+    "build": "tsup src --out-dir build",
+     "lint": "eslint src --ext .ts --fix"
   },
   "devDependencies": {
+    "@rocketseat/eslint-config": "2.2.2",
     "@types/node": "25.0.9",
+    "eslint": "9.39.2",
     "tsup": "8.5.1",
     "tsx": "4.21.0",
     "typescript": "5.9.3"

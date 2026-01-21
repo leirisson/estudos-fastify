@@ -5,18 +5,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start":"node build/server.cjs",
+    "start": "node build/server.cjs",
     "start:dev": "tsx watch src/server.ts",
     "build": "tsup src --out-dir build"
   },
-    "devDependencies": {
-    "@types/node": "^25.0.9",
-    "tsup": "^8.5.1",
-    "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+  "devDependencies": {
+    "@types/node": "25.0.9",
+    "tsup": "8.5.1",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3"
   },
-    "dependencies": {
-    "fastify": "^5.7.1"
+  "dependencies": {
+    "fastify": "5.7.1"
   },
   "keywords": [],
   "author": "",

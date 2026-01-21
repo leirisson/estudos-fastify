@@ -1,32 +1,40 @@
+import { RegisterUseCase } from '@/use-cases/register'
 import { FastifyRequest, FastifyReply } from 'fastify'
-import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
-import { hash } from 'bcryptjs'
-import { registerUseCase } from '@/use-cases/register'
 
 
-export async function register(request: FastifyRequest, reply: FastifyReply) {
-    const registerBodySchema = z.object({
-        name: z.string(),
-        email: z.email(),
-        password: z.string().min(6)
-    })
+export class RegisterController {
+    constructor(private resgisterUseCase: RegisterUseCase) { }
 
-    const {
-        name,
-        email,
-        password
-    } = registerBodySchema.parse(request.body)
+    async register(request: FastifyRequest, reply: FastifyReply) {
+        const registerBodySchema = z.object({
+            name: z.string(),
+            email: z.email(),
+            password: z.string().min(6)
+        })
 
-    try {
-        await registerUseCase({
+        const {
             name,
             email,
             password
-        })
-    } catch (error) {
-        return reply.status(409).send()
-    }
+        } = registerBodySchema.parse(request.body)
 
-    return reply.status(201).send
+        try {
+            console.log('[DEBUG] passou aqui 1')
+            console.log({
+                name,
+                email,
+                password
+            })
+            await this.resgisterUseCase.execute({
+                name,
+                email,
+                password
+            })
+        } catch (error) {
+            return reply.status(409).send(error)
+        }
+
+        return reply.status(201).send()
+    }
 }

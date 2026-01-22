@@ -1,3 +1,4 @@
+import { UserAlredyExistsError } from '@/use-cases/errors/user.already.exists.error'
 import { RegisterUseCase } from '@/use-cases/register'
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
@@ -20,19 +21,20 @@ export class RegisterController {
         } = registerBodySchema.parse(request.body)
 
         try {
-            console.log('[DEBUG] passou aqui 1')
-            console.log({
-                name,
-                email,
-                password
-            })
             await this.resgisterUseCase.execute({
                 name,
                 email,
                 password
             })
         } catch (error) {
-            return reply.status(409).send(error)
+
+            if (error instanceof UserAlredyExistsError) {
+                return reply.status(409).send(error)
+            }
+
+
+            throw error
+
         }
 
         return reply.status(201).send()

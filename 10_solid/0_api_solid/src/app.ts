@@ -1,7 +1,6 @@
 import { fastify } from 'fastify'
 import { appRoutes } from './http/routes'
 import { ZodError } from 'zod'
-import { issue } from 'zod/v4/core/util.cjs'
 import { env } from './env'
 
 

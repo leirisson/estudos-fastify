@@ -17,7 +17,7 @@ model Product {
   id          String   @id @default(uuid())
   name        String
   description String
-  price       String
+  price       Float
   stock       Int
   active      Boolean
   createAt    DateTime @default(now())

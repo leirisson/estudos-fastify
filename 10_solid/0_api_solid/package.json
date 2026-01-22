@@ -6,6 +6,7 @@
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "start": "node build/server.cjs",
     "start:dev": "tsx watch src/server.ts",
     "build": "tsup src --out-dir build",
@@ -15,6 +16,7 @@
     "@rocketseat/eslint-config": "2.2.2",
     "@types/node": "25.0.9",
     "@types/pg": "8.16.0",
+    "@vitest/coverage-v8": "4.0.17",
     "eslint": "9.39.2",
     "prisma": "7.3.0",
     "tsup": "8.5.1",

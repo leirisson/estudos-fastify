@@ -20,6 +20,11 @@
     "declaration": true,
     "declarationMap": true,
 
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src/*"],
+    },
+
     // Stricter Typechecking Options
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,

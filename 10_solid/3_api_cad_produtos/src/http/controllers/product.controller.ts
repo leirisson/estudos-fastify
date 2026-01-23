@@ -1,8 +1,11 @@
 import { ProductCreateUseCase } from "@/use-case/CreateProductUseCase.ts";
+import { ProductDesativateError } from "@/use-case/errors/Product.desativate.Error";
 import { GetProductByIdUseCase } from "@/use-case/GetProductByIdUseCase";
 import { ListProductsUseCase } from "@/use-case/ListProductsUseCase";
+import { UpdateProductUseCase } from "@/use-case/UpdateProductUseCase";
 import { FastifyReply, FastifyRequest } from "fastify";
-import { uuid, z } from "zod";
+import { Product } from "generated/prisma/client";
+import { z } from "zod";
 
 
 
@@ -11,7 +14,8 @@ export class ProductController {
     constructor(
         private productCreateUseCase: ProductCreateUseCase,
         private listproductUseCase: ListProductsUseCase,
-        private getProductByIdUseCase: GetProductByIdUseCase
+        private getProductByIdUseCase: GetProductByIdUseCase,
+        private updateProductUseCase: UpdateProductUseCase
     ) { }
 
     async getAll(request: FastifyRequest, reply: FastifyReply) {
@@ -68,5 +72,34 @@ export class ProductController {
         }
 
 
+    }
+
+    async update(request: FastifyRequest, reply: FastifyReply) {
+        try {
+            const createSchemaParams = z.object({
+                id: z.uuid()
+            })
+
+            const bodySchemaUpdateProduct = z.object({
+                name: z.string().optional(),
+                description: z.string().optional(),
+                price: z.number().optional(),
+                stock: z.number().optional(),
+                active: z.boolean().optional()
+            })
+
+            const { id } = createSchemaParams.parse(request.params)
+            const { name, description, price, stock, active } = bodySchemaUpdateProduct.parse(request.body)
+
+            const product = await this.updateProductUseCase.execute(id, { name, price, description, stock, active } as Product)
+
+            return reply.send(product)
+        } catch (error) {
+
+            if (error instanceof ProductDesativateError) {
+                return reply.status(409).send(error)
+            }
+            throw error
+        }
     }
 }

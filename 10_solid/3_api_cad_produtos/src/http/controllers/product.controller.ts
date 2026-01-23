@@ -1,4 +1,5 @@
-import { ProductCreateUseCase } from "@/use-case/register";
+import { ProductCreateUseCase } from "@/use-case/CreateProductUseCase.ts";
+import { ListProductsUseCase } from "@/use-case/ListProductsUseCase";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
@@ -6,7 +7,20 @@ import { z } from "zod";
 
 
 export class ProductController {
-    constructor(private productCreateUseCase: ProductCreateUseCase) { }
+    constructor(
+        private productCreateUseCase: ProductCreateUseCase,
+        private listproductUseCase: ListProductsUseCase
+    ) { }
+
+    async getAll(request: FastifyRequest, reply: FastifyReply){
+        try {
+            const products = await this.listproductUseCase.execute()
+            return reply.send(products)
+            
+        } catch (error) {
+            return error
+        }
+    }
 
     async create(request: FastifyRequest, reply: FastifyReply) {
         try {
@@ -20,7 +34,7 @@ export class ProductController {
 
             const { name, price, description, stock, active } = createProductBodySchema.parse(request.body)
 
-            const product = await this.productCreateUseCase.execute({
+            await this.productCreateUseCase.execute({
                 name,
                 price,
                 description,
@@ -28,10 +42,10 @@ export class ProductController {
                 active
             })
 
-            return reply.status(201).send({ product })
+            return reply.status(201).send()
 
         } catch (error) {
-            return error
+            return reply.send(error)
         }
 
 

@@ -71,7 +71,7 @@ export class ProductController {
         } catch (error) {
 
             if (error instanceof ErrorPriceIncorrect) {
-                return reply.status(409).send(error)
+                return reply.status(400).send(error)
             }
             throw error
         }
@@ -102,7 +102,7 @@ export class ProductController {
         } catch (error) {
 
             if (error instanceof ProductDesativateError) {
-                return reply.status(409).send(error)
+                return reply.status(400).send(error)
             }
             throw error
         }

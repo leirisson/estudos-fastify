@@ -1,7 +1,8 @@
 import { ProductCreateUseCase } from "@/use-case/CreateProductUseCase.ts";
+import { GetProductByIdUseCase } from "@/use-case/GetProductByIdUseCase";
 import { ListProductsUseCase } from "@/use-case/ListProductsUseCase";
 import { FastifyReply, FastifyRequest } from "fastify";
-import { z } from "zod";
+import { uuid, z } from "zod";
 
 
 
@@ -9,14 +10,32 @@ import { z } from "zod";
 export class ProductController {
     constructor(
         private productCreateUseCase: ProductCreateUseCase,
-        private listproductUseCase: ListProductsUseCase
+        private listproductUseCase: ListProductsUseCase,
+        private getProductByIdUseCase: GetProductByIdUseCase
     ) { }
 
-    async getAll(request: FastifyRequest, reply: FastifyReply){
+    async getAll(request: FastifyRequest, reply: FastifyReply) {
         try {
             const products = await this.listproductUseCase.execute()
             return reply.send(products)
-            
+
+        } catch (error) {
+            return error
+        }
+    }
+
+    async getProductById(request: FastifyRequest, reply: FastifyReply) {
+        try {
+            const createSchemaParams = z.object({
+                id: z.uuid()
+            })
+
+            const { id } = createSchemaParams.parse(request.params)
+
+            const product = await this.getProductByIdUseCase.execute(id)
+
+            return reply.status(200).send(product)
+
         } catch (error) {
             return error
         }

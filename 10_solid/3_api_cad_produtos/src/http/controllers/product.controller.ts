@@ -1,4 +1,5 @@
 import { ProductCreateUseCase } from "@/use-case/CreateProductUseCase.ts";
+import { ErrorPriceIncorrect } from "@/use-case/errors/Error.price.incorrect";
 import { ProductDesativateError } from "@/use-case/errors/Product.desativate.Error";
 import { GetProductByIdUseCase } from "@/use-case/GetProductByIdUseCase";
 import { ListProductsUseCase } from "@/use-case/ListProductsUseCase";
@@ -68,7 +69,11 @@ export class ProductController {
             return reply.status(201).send()
 
         } catch (error) {
-            return reply.send(error)
+
+            if (error instanceof ErrorPriceIncorrect) {
+                return reply.status(409).send(error)
+            }
+            throw error
         }
 
 

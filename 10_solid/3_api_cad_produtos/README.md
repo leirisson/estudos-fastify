@@ -10,10 +10,10 @@
 ======================
 📏 Regras de Negócio
 ======================
-Não permitir preço ≤ 0
-Estoque não pode ser negativo
+[x] Não permitir preço ≤ 0
+[x] Estoque não pode ser negativo
 [x] Produto desativado não pode ser atualizado
-Não permitir dois produtos com o mesmo nome
+[x] Não permitir dois produtos com o mesmo nome
 
 ==============================
 ⚙️ Requisitos Não Funcionais

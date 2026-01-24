@@ -29,7 +29,7 @@ export class RegisterController {
         } catch (error) {
 
             if (error instanceof UserAlredyExistsError) {
-                return reply.status(409).send(error)
+                return reply.status(409).send({messgae: error.message})
             }
 
 

@@ -1,16 +1,9 @@
 import { FastifyInstance } from "fastify"
-import { PrismaUsersRepository } from '@/repository/prisma/prisma.user.repository'
-import { AthenticateUseCase } from "@/use-cases/authenticate"
 import { AthenticateController } from "../controller/authenticate.controller"
+import { makeRegisterUseCase } from "@/use-cases/factories/make.register.use.case"
 
-
-
-// usando inverção de dependencias
-
-const usersRepository = new PrismaUsersRepository()
-const resgisterUseCase = new AthenticateUseCase(usersRepository)
-const authenticateController = new AthenticateController(resgisterUseCase)
-
+const useCase = makeRegisterUseCase()
+const authenticateController = new AthenticateController(useCase)
 
 export async function authenticateRoutes(app: FastifyInstance) {
     app.post('/sessions', (request, reply) => authenticateController.register(request, reply))

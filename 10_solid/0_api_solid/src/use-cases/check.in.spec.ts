@@ -25,7 +25,6 @@ describe('checkin UseCase', () => {
             longitude: -60.0134442
         })
 
-        console.log()
 
         vi.useFakeTimers()
     })

@@ -1,0 +1,19 @@
+
+
+// configuração do arquivo prisma.ts:
+
+import { env } from "@/infra/env"
+import { PrismaClient } from "@/generated/prisma/client"
+
+import { PrismaPg } from '@prisma/adapter-pg'
+
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL })
+
+const prisma = new PrismaClient({
+    adapter,
+    log: env.NODE_ENV === 'dev' ? ['query'] : []
+})
+
+
+
+export default prisma

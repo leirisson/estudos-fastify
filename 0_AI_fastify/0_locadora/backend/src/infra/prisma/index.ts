@@ -1,9 +1,5 @@
-
-
-// configuração do arquivo prisma.ts:
-
-import { env } from "@/infra/env"
-import { PrismaClient } from "@/generated/prisma/client"
+import { env } from "../env/index.js"
+import { PrismaClient } from "../../generated/prisma/client.js"
 
 import { PrismaPg } from '@prisma/adapter-pg'
 
